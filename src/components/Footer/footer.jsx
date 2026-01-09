@@ -10,7 +10,7 @@ function Footer() {
                 <div className="row">
     
                     <div className="col-md-4">
-                        <h5>Filmix</h5>
+                        <h5>Nebula</h5>
                         <p className="text-muted">
                             Tu sitio de películas y estrenos.
                         </p>
@@ -43,7 +43,7 @@ function Footer() {
                 <hr />
 
                 <div className="text-center text-muted">
-                    © {new Date().getFullYear()} Filmix — Proyecto educativo
+                    © {new Date().getFullYear()} Nebula — Proyecto Rolling Code
                 </div>
             </div>
         </footer>

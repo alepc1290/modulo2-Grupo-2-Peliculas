@@ -1,0 +1,108 @@
+.movie-card {
+  min-width: 280px; 
+  height: 160px;    
+  background-color: #111;
+  color: white;
+  border: none;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+  position: relative; 
+  overflow: hidden;   
+  padding: 2px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.movie-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent, 
+    #a726ff, 
+    white, 
+    transparent 30%
+  );
+  animation: rotateBorder 4s linear infinite;
+  z-index: -2;
+  opacity: 0; 
+  transition: opacity 0.3s ease;
+}
+
+.movie-card::after {
+  content: "";
+  position: absolute;
+  inset: 2px; /* Grosor del borde */
+  background: #111;
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 0; 
+  transition: opacity 0.3s ease;
+}
+
+/* --- ESTADOS HOVER --- */
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card:hover::before,
+.movie-card:hover::after {
+  opacity: 1;
+}
+
+.movie-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 10px; 
+}
+
+.movie-card-overlay {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: rgba(44, 0, 98, 0.573); 
+  backdrop-filter: blur(8px);       
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;                       
+  transition: opacity 0.3s ease;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.movie-card:hover .movie-card-overlay {
+  opacity: 1;
+}
+
+@keyframes rotateBorder {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn-ver {
+  background-color: #6a1b9a;
+  color: white;
+  border-color: black;
+  padding: 8px 25px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-ver:hover {
+  transform: scale(1.1);
+  background-color: #4f1076;
+}
