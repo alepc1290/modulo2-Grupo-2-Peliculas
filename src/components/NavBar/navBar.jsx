@@ -1,49 +1,68 @@
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+import { FaSearch, FaUser } from "react-icons/fa";
+import { useState } from "react";
+import "./navBar.css";
 
 function NavBar() {
+  const [search, setSearch] = useState("");
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container fluid>
-        <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/movies">Peliculas</Nav.Link>
-            <Nav.Link href="/movies">Acerca de Nosotros</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link>
-          </Nav>
-          <Form className="d-flex">
+    <Navbar expand="lg" className="navbar-nebula" fixed="top">
+      <Container fluid className="navbar-container">
+
+        <Navbar.Brand className="navbar-logo">
+          <img
+            src="/Nebula-LOGO.png"
+            alt="Nebula"
+            height="50"
+          />
+        </Navbar.Brand>
+
+        <Form className="navbar-search">
+          <InputGroup>
+            <InputGroup.Text className="search-icon">
+              <FaSearch />
+            </InputGroup.Text>
+
             <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
+              type="text"
+              placeholder="Buscar película..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="search-input"
             />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-        </Navbar.Collapse>
+
+            {search.length > 0 && (
+              <Button className="search-btn btn-animated-border">
+                Buscar
+              </Button>
+            )}
+          </InputGroup>
+        </Form>
+
+        <Nav className="navbar-right">
+          <Nav.Link 
+          href="/home"
+          className="nav-link-custom">
+            Inicio
+          </Nav.Link>
+
+          <span className="separator">|</span>
+
+          <Nav.Link
+            href="/register"
+            className="user-icon d-flex align-items-center"
+          >
+            <FaUser size={20} />
+          </Nav.Link>
+
+        </Nav>
+
       </Container>
     </Navbar>
   );
