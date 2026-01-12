@@ -11,7 +11,7 @@ export default function Footer() {
 
           <Col md={4}>
             <img src="./Nebula-LOGO.png"
-              width="100%"
+              width="30%"
               alt="" />
           </Col>
 
