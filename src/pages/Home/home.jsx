@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import MovieRow from '../../components/MovieRow/movieRow';
-import FeaturedMovie from './Destacada';
+import FeaturedMovie from './destacada';
 import { getLSItems } from '../../utils/function';
-import Intro from '../../components/Modal/modal'; 
 import IntroComponent from '../../components/intro/intro'; 
 
 const Home = ({ searchTerm = "" }) => {
@@ -13,7 +12,7 @@ const Home = ({ searchTerm = "" }) => {
     return !yaVioIntro;
   });
 
-  const handleIntroFinish = () => {
+  const handleIntroFinish = () => { 
     setShowIntro(false);
     sessionStorage.setItem("intro_nebula_seen", "true");
   };
