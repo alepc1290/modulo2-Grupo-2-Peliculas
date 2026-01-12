@@ -1,0 +1,105 @@
+.modal-backdrop.show {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.nebula-modal .modal-content {
+  background: rgba(5, 4, 4, 0.8);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 79, 216, 0.4);
+  box-shadow: 0 0 40px rgba(255, 79, 216, 0.2);
+}
+
+.nebula-modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.597);
+}
+
+.nebula-modal-header,
+.nebula-modal-header .modal-title {
+  color: white !important;
+}
+
+.nebula-modal-body label {
+  color: white !important;
+  font-weight: 500;
+}
+
+.nebula-modal-body input,
+.nebula-modal-body textarea,
+.nebula-modal-body select {
+  color: white !important;
+}
+
+.nebula-modal-body ::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+.nebula-modal-body .form-check-label {
+  color: white !important;
+}
+
+.nebula-modal-header .modal-title {
+  color: #ff4fd8;
+  font-weight: 600;
+}
+
+.nebula-modal-header .btn-close {
+  filter: invert(1);
+}
+
+.nebula-modal-body {
+  color: white;
+}
+
+.nebula-modal-body .form-control,
+.nebula-modal-body .form-select {
+  background-color: transparent;
+  border: 1px solid rgba(255, 79, 216, 0.45);
+  color: white;
+}
+
+.nebula-modal-body .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.nebula-modal-body .form-control:focus,
+.nebula-modal-body .form-select:focus {
+  border-color: #ff4fd8;
+  box-shadow: 0 0 10px rgba(255, 79, 216, 0.7);
+  background-color: transparent;
+}
+
+
+.nebula-modal-body option {
+  background-color: #0b0b15;
+  color: white;
+}
+
+.nebula-modal-body .form-check-input {
+  background-color: transparent;
+  border: 1px solid rgba(255, 79, 216, 0.5);
+}
+
+.nebula-modal-body .form-check-input:checked {
+  background-color: #231f22;
+  border-color: #302a2f;
+}
+
+.nebula-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.search-btn {
+  background: rgba(5, 4, 4, 0.8);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 79, 216, 0.4);
+  box-shadow: 0 0 40px rgba(255, 79, 216, 0.2);
+}
+
+.search-btn:hover {
+  box-shadow: 0 0 12px rgba(26, 24, 25, 0.7);
+}
+
