@@ -1,5 +1,5 @@
-import './Intro.css'; 
 import introVideo from '../../vid/introNebula.mp4';
+import './intro.css'; 
 
 const Intro = ({ onFinish }) => {
   return (
