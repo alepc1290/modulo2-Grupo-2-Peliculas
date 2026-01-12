@@ -1,0 +1,3 @@
+{
+    "rutas": [{"origen": "/[^.]+", "destino":"/", "estado":200}]
+}
