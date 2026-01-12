@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import MovieRow from '../../components/MovieRow/movieRow';
-import FeaturedMovie from './destacada';
 import { getLSItems } from '../../utils/function';
 import IntroComponent from '../../components/intro/intro'; 
+import FeaturedMovie from './destacada';
 
 const Home = ({ searchTerm = "" }) => {
   
