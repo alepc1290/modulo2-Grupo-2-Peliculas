@@ -35,7 +35,7 @@ export default function Footer() {
           </Col>
 
           <Col md={4} className="text-end footer-links">
-            <a href="#">Políticas de privacidad</a>
+            <a href="https://policies.google.com/privacy?hl=es">Políticas de privacidad</a>
             <a href="/aboutus">Nosotros</a>
             <a href="/">Inicio</a>
           </Col>

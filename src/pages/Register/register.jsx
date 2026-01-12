@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Form, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { getLSItems, setLSItems } from "../../utils/function"; // Ajustá la ruta si es necesario
 import "./register.css";
 
 function Register() {
   const [mode, setMode] = useState("signup");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -25,51 +27,71 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError(""); // Limpiamos errores previos
 
-    if (!form.email || !form.password) return;
+    const listaUsuarios = getLSItems("users") || [];
 
     if (mode === "signup") {
-      if (
-        !form.nombre ||
-        !form.confirmPassword ||
-        !form.terms ||
-        form.password !== form.confirmPassword
-      ) {
-        return;
+      // VALIDACIONES
+      if (form.password !== form.confirmPassword) {
+        return setError("Las contraseñas no coinciden");
+      }
+      if (!form.terms) {
+        return setError("Debes aceptar los términos y condiciones");
+      }
+
+      // CREAR USUARIO (Acceso VIP como Admin)
+      const nuevoUsuario = {
+        username: form.nombre,
+        email: form.email,
+        password: form.password,
+        role: "admin", // Lo creamos como admin de una
+        id: Date.now()
+      };
+
+      setLSItems("users", [...listaUsuarios, nuevoUsuario]);
+      setLSItems("isAdmin", true); // Activamos permiso para el AuthChecker
+      setLSItems("userLogueado", nuevoUsuario);
+      
+      navigate("/admin");
+
+    } else {
+      // LÓGICA DE LOGIN (Si el usuario cambia de pestaña)
+      const usuarioEncontrado = listaUsuarios.find(
+        (u) => u.email === form.email && u.password === form.password
+      );
+
+      if (usuarioEncontrado) {
+        const esAdmin = usuarioEncontrado.role === "admin";
+        setLSItems("isAdmin", esAdmin);
+        setLSItems("userLogueado", usuarioEncontrado);
+        navigate(esAdmin ? "/admin" : "/home");
+      } else {
+        setError("Credenciales incorrectas");
       }
     }
-
-    navigate("/admin");
   };
 
   return (
     <div className="nebula-auth-wrapper">
       <div className="nebula-auth-card">
-
         <h1 className="nebula-logo">BIENVENIDO</h1>
 
         <div className="nebula-tabs">
-          <span
-            className={mode === "signup" ? "active" : ""}
-            onClick={() => setMode("signup")}
-          >
+          <span className={mode === "signup" ? "active" : ""} onClick={() => setMode("signup")}>
             SIGN UP
           </span>
-          <span
-            className={mode === "login" ? "active" : ""}
-            onClick={() => setMode("login")}
-          >
+          <span className={mode === "login" ? "active" : ""} onClick={() => setMode("login")}>
             LOG IN
           </span>
           <div className={`tab-indicator ${mode}`} />
         </div>
 
-        <Form
-          className={`nebula-form ${mode}`}
-          onSubmit={handleSubmit}
-        >
+        {error && <Alert variant="danger" className="py-2 small">{error}</Alert>}
+
+        <Form className={`nebula-form ${mode}`} onSubmit={handleSubmit}>
           {mode === "signup" && (
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Control
                 placeholder="Nombre completo"
                 name="nombre"
@@ -80,7 +102,7 @@ function Register() {
             </Form.Group>
           )}
 
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.Control
               type="email"
               placeholder="Email ID"
@@ -91,7 +113,7 @@ function Register() {
             />
           </Form.Group>
 
-          <Form.Group>
+          <Form.Group className="mb-3">
             <Form.Control
               type="password"
               placeholder="Password"
@@ -104,7 +126,7 @@ function Register() {
 
           {mode === "signup" && (
             <>
-              <Form.Group>
+              <Form.Group className="mb-3">
                 <Form.Control
                   type="password"
                   placeholder="Confirm Password"
@@ -117,27 +139,18 @@ function Register() {
 
               <Form.Check
                 label="I agree with terms & conditions"
-                className="nebula-check"
+                className="nebula-check mb-3"
                 name="terms"
                 checked={form.terms}
                 onChange={handleChange}
-                required
               />
             </>
           )}
 
-          <div className="d-flex gap-3">
-            {mode === "signup" && (
-              <Button type="submit" className="search-btn">
-                REGISTER
-              </Button>
-            )}
-
-            {mode === "login" && (
-              <Button type="submit" className="search-btn">
-                LOG IN
-              </Button>
-            )}
+          <div className="d-grid">
+            <Button type="submit" className="search-btn">
+              {mode === "signup" ? "REGISTER" : "LOG IN"}
+            </Button>
           </div>
         </Form>
       </div>

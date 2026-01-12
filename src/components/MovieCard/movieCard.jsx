@@ -1,7 +1,6 @@
 import React from 'react'
 import "./movieCard.css"
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+
 import { useNavigate } from 'react-router';
 
 function MovieCard({ imagen, titulo, }) {
@@ -17,7 +16,7 @@ function MovieCard({ imagen, titulo, }) {
 
       <div className="movie-card-overlay">
         <h5 className="overlay-title">{titulo}</h5>
-        <button className="btn-ver" onClick={() => navigate('/login')}>
+        <button className="btn-ver" onClick={() => navigate('/register')}>
           VER
         </button>
       </div>

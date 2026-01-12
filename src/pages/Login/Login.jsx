@@ -1,43 +1,57 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Asegurate que sea react-router-dom
 import { getLSItems, setLSItems } from '../../utils/function';
-
 
 function Login() {
     const [errorLogin, setErrorLogin] = useState("");
     const navigate = useNavigate();
+
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        
         const form = e.target;
-        const formData = new FormData(form)
-        const data = Object.fromEntries(formData.entries())
-        const dataUser = getLSItems("userData");
-        if (dataUser.username === data.username) {
-            if (dataUser.password === data.password) {
-                setLSItems("isAdmin", true);
-                navigate("/Home");
-                setErrorLogin("")
-                return;
-            } else {
-                setLSItems("isAdmin", false)
-                return setErrorLogin("Datos Incorrectos")
-            }
+        const dataInput = Object.fromEntries(new FormData(form).entries());
+
+        const listaUsuarios = getLSItems("users") || [];
+
+        const usuarioEncontrado = listaUsuarios.find(
+            (u) => u.username === dataInput.username && u.password === dataInput.password
+        );
+
+        if (usuarioEncontrado) {
+            const esAdmin = usuarioEncontrado.role === "admin";
+            
+            setLSItems("isAdmin", esAdmin);
+            setLSItems("userLogueado", usuarioEncontrado);
+            
+            setErrorLogin("");
+            
+            navigate(esAdmin ? "/admin" : "/home");
         } else {
-            setLSItems("isAdmin", false)
-            return setErrorLogin("Datos Incorrectos")
+            
+            setLSItems("isAdmin", false);
+            setErrorLogin("Usuario o contraseña incorrectos");
         }
     }
+
     return (
-        <>
-            <NavbarComp />
-            <h1>Login</h1>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <input type="text" name="username" />
-                <input type="password" name="password" />
-                <button>Iniciar Sesion</button>
+        <div className="login-page">
+            
+            <h1>Iniciar Sesión</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="input-group">
+                    <label>Usuario:</label>
+                    <input type="text" name="username" required />
+                </div>
+                <div className="input-group">
+                    <label>Contraseña:</label>
+                    <input type="password" name="password" required />
+                </div>
+                <button type="submit">Entrar</button>
             </form>
-            {errorLogin && <p style={{ color: "red" }}>{errorLogin}</p>}
-        </>
+            
+            {errorLogin && <p style={{ color: "red", marginTop: "10px" }}>{errorLogin}</p>}
+        </div>
     )
 }
 

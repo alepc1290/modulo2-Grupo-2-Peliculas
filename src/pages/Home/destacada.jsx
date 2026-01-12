@@ -12,15 +12,19 @@ const FeaturedMovie = ({ movie }) => {
             }}
         >
             <div className="featured-content">
-                <h1 className="featured-title">Destacada</h1>
+                <p className="featured-badge">DESTACADA</p>
+                
+                <h1 className="featured-title">{movie.titulo}</h1>
+                
                 <p className="featured-description">
                     {movie.descripcion}
                 </p>
+                
                 <div className="featured-buttons">
-                    <button className="btn-animated-border" onClick={() => navigate('/login')}>
+                    <button className="btn-animated-border" onClick={() => navigate('/register')}>
                         REPRODUCIR
                     </button>
-                    <button className="btn-more" onClick={() => navigate('/login')}>
+                    <button className="btn-more" onClick={() => navigate('/register')}>
                         VER MÁS
                     </button>
                 </div>
