@@ -53,13 +53,13 @@ function Register() {
             className={mode === "signup" ? "active" : ""}
             onClick={() => setMode("signup")}
           >
-            SIGN UP
+            Registro
           </span>
           <span
             className={mode === "login" ? "active" : ""}
             onClick={() => setMode("login")}
           >
-            LOG IN
+            Iniciar sesion
           </span>
           <div className={`tab-indicator ${mode}`} />
         </div>
@@ -83,7 +83,7 @@ function Register() {
           <Form.Group>
             <Form.Control
               type="email"
-              placeholder="Email ID"
+              placeholder="Email"
               name="email"
               value={form.email}
               onChange={handleChange}
@@ -94,7 +94,7 @@ function Register() {
           <Form.Group>
             <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               name="password"
               value={form.password}
               onChange={handleChange}
@@ -107,7 +107,7 @@ function Register() {
               <Form.Group>
                 <Form.Control
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder="Confirmar contraseña"
                   name="confirmPassword"
                   value={form.confirmPassword}
                   onChange={handleChange}
@@ -116,7 +116,7 @@ function Register() {
               </Form.Group>
 
               <Form.Check
-                label="I agree with terms & conditions"
+                label="Acepto los terminos y condiciones."
                 className="nebula-check"
                 name="terms"
                 checked={form.terms}
@@ -129,13 +129,13 @@ function Register() {
           <div className="d-flex gap-3">
             {mode === "signup" && (
               <Button type="submit" className="search-btn">
-                REGISTER
+                Registrarme
               </Button>
             )}
 
             {mode === "login" && (
               <Button type="submit" className="search-btn">
-                LOG IN
+                Iniciar sesion
               </Button>
             )}
           </div>
