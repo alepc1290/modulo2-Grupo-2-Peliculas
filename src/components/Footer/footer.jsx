@@ -1,55 +1,47 @@
-import React from 'react'
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./footer.css";
 
-function Footer() {
-    return (
-        <div className='footer'> 
+export default function Footer() {
+  return (
+    <footer className="footer">
+      <Container>
+        <Row className="align-items-center">
 
-        <footer className=" bg-dark text-light mt-5">
-            <div className="container py-4">
-                
-                <div className="row">
-    
-                    <div className="col-md-4">
-                        <h5>Nebula</h5>
-                        <p className="text-muted">
-                            Tu sitio de películas y estrenos.
-                        </p>
-                    </div>
+          <Col md={4}>
+            <img src="./Nebula-LOGO.png"
+              width="100%"
+              alt="" />
+          </Col>
 
-
-
-                    <div className="col-md-4">
-                        <h6>Secciones</h6>
-                        <ul className="list-unstyled">
-                            <li><a href="/home" className="text-light">Inicio</a></li>
-                            <li><a href="/movies" className="text-light">Películas</a></li>
-                            <li><a href="/aboutus" className="text-light">Nosotros</a></li>
-                        </ul>
-                    </div>
-
-
-                    
-                    <div className="col-md-4">
-                        <h6>Seguinos</h6>
-                        <div className="d-flex gap-3">
-                            <a href="#" className="text-light">Instagram</a>
-                            <a href="#" className="text-light">Twitter</a>
-                            <a href="#" className="text-light">Facebook</a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <hr />
-
-                <div className="text-center text-muted">
-                    © {new Date().getFullYear()} Nebula — Proyecto Rolling Code
-                </div>
+          <Col md={4} className="text-center">
+            <div className="socials">
+              <a href="/error404" target="_blank" rel="noreferrer">
+                f
+              </a>
+              <a href="/error404" target="_blank" rel="noreferrer">
+                ◎
+              </a>
+              <a href="/error404" target="_blank" rel="noreferrer">
+                X
+              </a>
             </div>
-        </footer>
-        </div>
-    )
+
+
+            <div className="copyright">
+              © 2026 Nebula
+            </div>
+          </Col>
+
+          <Col md={4} className="text-end footer-links">
+            <a href="#">Políticas de privacidad</a>
+            <a href="/aboutus">Nosotros</a>
+            <a href="/">Inicio</a>
+          </Col>
+
+        </Row>
+      </Container>
+    </footer>
+  );
 }
-
-
-export default Footer
