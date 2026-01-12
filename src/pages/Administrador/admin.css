@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+main {
+  flex: 1;
+}
+
+.admin-container {
+  padding-top: 140px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  color: white;
+}
+
+.admin-panel {
+  background: transparent;        
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7); 
+  padding: 30px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-header h2 {
+  font-size: 22px;
+}
+
+.btn-add-movie {
+  background: rgba(5, 4, 4, 0.8);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 79, 216, 0.4);
+  box-shadow: 0 0 40px rgba(255, 79, 216, 0.2);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.admin-table th {
+  font-weight: 500;
+  color: #c084fc;
+}
+
+.actions svg {
+  margin: 0 6px;
+  cursor: pointer;
+  color: #c084fc;
+}
+
+.actions svg:hover {
+  color: white;
+}
+/* admin.css */
+@media (max-width: 768px) {
+  .admin-container {
+    padding-top: 100px; /* Bajamos el margen superior en celular */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .admin-header {
+    flex-direction: column; /* Título arriba, botón abajo */
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .admin-header h2 {
+    font-size: 18px; /* Texto más chico */
+  }
+}

@@ -1,0 +1,154 @@
+.nebula-auth-wrapper {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a0635, #05000c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nebula-auth-card {
+  width: 420px;
+  padding: 40px 35px;
+  background: rgba(15, 10, 30, 0.6);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(150, 80, 255, 0.35);
+  color: #fff;
+  animation: fadeUp 0.7s ease;
+}
+
+.nebula-logo {
+  text-align: center;
+  letter-spacing: 4px;
+  color: #c77dff;
+  margin-bottom: 30px;
+}
+
+.nebula-tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.nebula-tabs span {
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.nebula-tabs span.active {
+  opacity: 1;
+  color: #fff;
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: -6px;
+  width: 80px;
+  height: 2px;
+  background: #b8599e;
+  transition: transform 0.4s ease;
+}
+
+.tab-indicator.signup {
+  transform: translateX(-60px);
+}
+
+.tab-indicator.login {
+  transform: translateX(60px);
+}
+
+.nebula-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.nebula-form .form-control {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  padding-left: 0;
+}
+
+.nebula-form .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.nebula-form .form-control:focus {
+  box-shadow: none;
+  border-color: #b8599e;
+}
+
+.nebula-check {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.nebula-check input {
+  background-color: transparent;
+  border: 1px solid #ff4fd8;
+  accent-color: #ff4fd8;
+}
+.nebula-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  text-decoration: none;
+}
+
+
+button.search-btn {
+  background: rgba(5, 4, 4, 0.8) !important;
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 79, 216, 0.4) !important;
+  box-shadow: 0 0 40px rgba(255, 79, 216, 0.2);
+  color: #ffffff !important;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+button.search-btn:hover {
+  box-shadow: 0 0 12px rgba(26, 24, 25, 0.7);
+  transform: scale(1.03);
+}
+
+
+.nebula-auth-card {
+  background: rgba(10, 8, 20, 0.45); 
+  backdrop-filter: blur(18px);
+}
+
+.nebula-form .form-control {
+  background-color: transparent !important;
+  color: #ffffff;
+  border-bottom: 2px solid rgba(255, 79, 216, 0.45);
+}
+
+.nebula-form .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.nebula-form .form-control:focus {
+  background-color: transparent !important;
+  color: #ffffff;
+  border-bottom-color: #ff4fd8;
+  box-shadow: none;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

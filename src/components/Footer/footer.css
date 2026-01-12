@@ -1,0 +1,99 @@
+.footer {
+  position: relative;  
+  bottom: 0;
+  left: 0;
+  width: 100%;      
+  background-color: #000;
+  color: #fff;
+  padding: 10px 80px;
+  box-sizing: border-box;
+  z-index: 9999;
+  background-image: url("/Nebula-FONDO.png");
+}
+
+
+.footer-title {
+  margin: 0;
+  letter-spacing: 2px;
+  color: #b8599e;              
+}
+
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 20px;
+  margin-bottom: 6px;
+  color: #b8599e;                 
+}
+
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-links a {
+  color: #b8599e;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #ff4fd8;                
+  text-shadow: 0 0 8px #ff4fd8;   
+  transform: translateX(4px);    
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.socials a {
+  color: #b8599e;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.socials a:hover {
+  color: #ff4fd8;
+  text-shadow: 0 0 8px #ff4fd8;
+  transform: scale(1.15);
+}
+
+
+.copyright {
+  color: #b8599e;
+  font-size: 14px;
+}
+
+.footer.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; 
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.app-content {
+  flex: 1; 
+}

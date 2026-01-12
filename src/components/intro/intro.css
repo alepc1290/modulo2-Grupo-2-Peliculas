@@ -1,0 +1,30 @@
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  z-index: 9999; /* Por encima de TODO, incluso el Navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skip-btn {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  background: transparent;
+  border: 1px solid #a726ff;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  z-index: 10000;
+}

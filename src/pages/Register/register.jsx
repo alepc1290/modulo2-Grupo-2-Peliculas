@@ -1,0 +1,179 @@
+import { useState } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { getLSItems, setLSItems } from "../../utils/function";
+import "./register.css";
+
+function Register() {
+  const [mode, setMode] = useState("signup");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    nombre: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    terms: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm({
+      ...form,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+
+    const listaUsuarios = getLSItems("usuarios") || [];
+
+    if (mode === "signup") {
+      if (form.password !== form.confirmPassword) {
+        return setError("Las contraseñas no coinciden");
+      }
+      if (!form.terms) {
+        return setError("Debes aceptar los términos y condiciones");
+      }
+
+      const nuevoUsuario = {
+        username: form.nombre,
+        email: form.email,
+        password: form.password,
+        rol: form.email === "admin@nebula.com" ? "admin" : "user",
+        id: Date.now()
+      };
+
+      setLSItems("usuarios", [...listaUsuarios, nuevoUsuario]);
+      
+      setLSItems("user_session", nuevoUsuario);
+
+      if (nuevoUsuario.rol === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/pagina-no-permitida"); 
+      }
+
+    } else {
+      const usuarioEncontrado = listaUsuarios.find(
+        (u) => u.email === form.email && u.password === form.password
+      );
+
+      if (usuarioEncontrado) {
+        setLSItems("user_session", usuarioEncontrado);
+        
+        if (usuarioEncontrado.rol === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/home");
+        }
+      } else {
+        setError("Credenciales incorrectas");
+      }
+    }
+  };
+
+  return (
+    <div className="nebula-auth-wrapper">
+      <div className="nebula-auth-card">
+        <h1 className="nebula-logo">BIENVENIDO</h1>
+
+        <div className="nebula-tabs">
+          <span
+            className={mode === "signup" ? "active" : ""}
+            onClick={() => setMode("signup")}
+          >
+            Registro
+          </span>
+          <span
+            className={mode === "login" ? "active" : ""}
+            onClick={() => setMode("login")}
+          >
+            Iniciar sesion
+          </span>
+          <div className={`tab-indicator ${mode}`} />
+        </div>
+
+        {error && <Alert variant="danger" className="py-2 small">{error}</Alert>}
+
+        <Form className={`nebula-form ${mode}`} onSubmit={handleSubmit}>
+          {mode === "signup" && (
+            <Form.Group className="mb-3">
+              <Form.Control
+                placeholder="Nombre completo"
+                name="nombre"
+                value={form.nombre}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+          )}
+
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="password"
+              placeholder="Contraseña"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          {mode === "signup" && (
+            <>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="password"
+                  placeholder="Confirmar contraseña"
+                  name="confirmPassword"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Check
+                label="Acepto los terminos y condiciones."
+                className="nebula-check"
+                name="terms"
+                checked={form.terms}
+                onChange={handleChange}
+              />
+            </>
+          )}
+
+          <div className="d-flex gap-3">
+            {mode === "signup" && (
+              <Button type="submit" className="search-btn">
+                Registrarme
+              </Button>
+            )}
+
+            {mode === "login" && (
+              <Button type="submit" className="search-btn">
+                Iniciar sesion
+              </Button>
+            )}
+          </div>
+        </Form>
+      </div>
+    </div>
+  );
+}
+
+export default Register;
