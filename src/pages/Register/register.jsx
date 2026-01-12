@@ -82,11 +82,17 @@ function Register() {
         <h1 className="nebula-logo">BIENVENIDO</h1>
 
         <div className="nebula-tabs">
-          <span className={mode === "signup" ? "active" : ""} onClick={() => setMode("signup")}>
-            SIGN UP
+          <span
+            className={mode === "signup" ? "active" : ""}
+            onClick={() => setMode("signup")}
+          >
+            Registro
           </span>
-          <span className={mode === "login" ? "active" : ""} onClick={() => setMode("login")}>
-            LOG IN
+          <span
+            className={mode === "login" ? "active" : ""}
+            onClick={() => setMode("login")}
+          >
+            Iniciar sesion
           </span>
           <div className={`tab-indicator ${mode}`} />
         </div>
@@ -109,7 +115,7 @@ function Register() {
           <Form.Group className="mb-3">
             <Form.Control
               type="email"
-              placeholder="Email ID"
+              placeholder="Email"
               name="email"
               value={form.email}
               onChange={handleChange}
@@ -120,7 +126,7 @@ function Register() {
           <Form.Group className="mb-3">
             <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               name="password"
               value={form.password}
               onChange={handleChange}
@@ -133,7 +139,7 @@ function Register() {
               <Form.Group className="mb-3">
                 <Form.Control
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder="Confirmar contraseña"
                   name="confirmPassword"
                   value={form.confirmPassword}
                   onChange={handleChange}
@@ -142,8 +148,8 @@ function Register() {
               </Form.Group>
 
               <Form.Check
-                label="I agree with terms & conditions"
-                className="nebula-check mb-3"
+                label="Acepto los terminos y condiciones."
+                className="nebula-check"
                 name="terms"
                 checked={form.terms}
                 onChange={handleChange}
@@ -151,10 +157,18 @@ function Register() {
             </>
           )}
 
-          <div className="d-grid">
-            <Button type="submit" className="search-btn">
-              {mode === "signup" ? "REGISTER" : "LOG IN"}
-            </Button>
+          <div className="d-flex gap-3">
+            {mode === "signup" && (
+              <Button type="submit" className="search-btn">
+                Registrarme
+              </Button>
+            )}
+
+            {mode === "login" && (
+              <Button type="submit" className="search-btn">
+                Iniciar sesion
+              </Button>
+            )}
           </div>
         </Form>
       </div>
