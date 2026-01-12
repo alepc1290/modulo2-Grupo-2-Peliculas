@@ -1,6 +1,6 @@
 import React from 'react'
 import MovieRow from '../../components/MovieRow/movieRow'
-import FeaturedMovie from './destacada';
+import FeaturedMovie from './Destacada';
 
 const Home = () => {
   const destacada = {

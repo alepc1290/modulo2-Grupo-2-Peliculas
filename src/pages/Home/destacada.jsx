@@ -12,7 +12,7 @@ const FeaturedMovie = ({ movie }) => {
             }}
         >
             <div className="featured-content">
-                <h1 className="featured-title">Película destacada</h1>
+                <h1 className="featured-title">Destacada</h1>
                 <p className="featured-description">
                     {movie.descripcion}
                 </p>
