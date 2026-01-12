@@ -16,6 +16,7 @@ const Aboutus = () => {
       <div className="about-hero">
         <h1>SOBRE <span className="text-purple">NEBULA</span></h1>
         <p>Tu destino final para el mejor entretenimiento.</p>
+        
       </div>
 
       <Container className="py-5">
