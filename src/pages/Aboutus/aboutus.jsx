@@ -7,7 +7,7 @@ const Aboutus = () => {
     { nombre: "Alejandro", img: "./src/assets/img/202f2e9e-fad0-4d51-8a0f-dc93f8d214c7.jpg" },
     { nombre: "nico", img: "./src/assets/img/cianca.jpg" },
     { nombre: "Jhonny", img: "./src/assets/img/jhonny.jpg" },
-    { nombre: "stephania", img: "URL_FOTO_COMPAÑERO" },
+    { nombre: "stephania", img: "./src/assets/img/stephania.jpg" },
   ];
 
   return (

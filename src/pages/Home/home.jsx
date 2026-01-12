@@ -2,21 +2,15 @@ import React, { useState } from 'react';
 import MovieRow from '../../components/MovieRow/movieRow';
 import FeaturedMovie from './Destacada';
 import { getLSItems } from '../../utils/function';
-
-// 1. CORRECCIÓN DEL IMPORT: Traemos el Componente, no el video
-// Fijate que la ruta apunta a 'components', no a 'vid'
-import Intro from '../../components/Modal/modal'; // ESPERÁ, vi que en tu carpeta se llama 'intro' minúscula
-// IMPORT CORRECTO SEGÚN TU CARPETA DE LA FOTO:
+import Intro from '../../components/Modal/modal'; 
 import IntroComponent from '../../components/intro/intro'; 
 
 const Home = ({ searchTerm = "" }) => {
   
-  // 2. CORRECCIÓN DEL ESTADO (Lazy State)
-  // Esto elimina el error rojo de "setState synchronously"
-  // Le preguntamos a la memoria ANTES de dibujar la pantalla
+  
   const [showIntro, setShowIntro] = useState(() => {
     const yaVioIntro = sessionStorage.getItem("intro_nebula_seen");
-    return !yaVioIntro; // Si no hay nada guardado, devuelve true (mostrar video)
+    return !yaVioIntro;
   });
 
   const handleIntroFinish = () => {
@@ -49,7 +43,6 @@ const Home = ({ searchTerm = "" }) => {
 
   return (
     <>
-      {/* Usamos el componente importado correctamente */}
       {showIntro && <IntroComponent onFinish={handleIntroFinish} />}
 
       <FeaturedMovie movie={destacadaData} />
