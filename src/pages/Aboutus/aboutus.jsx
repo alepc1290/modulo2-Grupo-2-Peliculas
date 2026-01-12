@@ -5,9 +5,9 @@ import './aboutus.css';
 const Aboutus = () => {
   const equipo = [
     { nombre: "Alejandro", img: "./src/assets/img/202f2e9e-fad0-4d51-8a0f-dc93f8d214c7.jpg" },
-    { nombre: "Stephanya", img: "URL_FOTO_COMPAÑERO" },
-    { nombre: "Jhonny", img: "URL_FOTO_COMPAÑERO" },
-    { nombre: "Nico", img: "URL_FOTO_COMPAÑERO" },
+    { nombre: "nico", img: "./src/assets/img/cianca.jpg" },
+    { nombre: "Jhonny", img: "./src/assets/img/jhonny.jpg" },
+    { nombre: "stephania", img: "URL_FOTO_COMPAÑERO" },
   ];
 
   return (

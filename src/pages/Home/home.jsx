@@ -1,27 +1,41 @@
-import React from 'react'
-import MovieRow from '../../components/MovieRow/movieRow'
+import React, { useState } from 'react';
+import MovieRow from '../../components/MovieRow/movieRow';
 import FeaturedMovie from './Destacada';
 import { getLSItems } from '../../utils/function';
 
+// 1. CORRECCIÓN DEL IMPORT: Traemos el Componente, no el video
+// Fijate que la ruta apunta a 'components', no a 'vid'
+import Intro from '../../components/Modal/modal'; // ESPERÁ, vi que en tu carpeta se llama 'intro' minúscula
+// IMPORT CORRECTO SEGÚN TU CARPETA DE LA FOTO:
+import IntroComponent from '../../components/intro/intro'; 
+
 const Home = ({ searchTerm = "" }) => {
-  // Leemos ÚNICAMENTE de la base de datos para que el Admin tenga el control
+  
+  // 2. CORRECCIÓN DEL ESTADO (Lazy State)
+  // Esto elimina el error rojo de "setState synchronously"
+  // Le preguntamos a la memoria ANTES de dibujar la pantalla
+  const [showIntro, setShowIntro] = useState(() => {
+    const yaVioIntro = sessionStorage.getItem("intro_nebula_seen");
+    return !yaVioIntro; // Si no hay nada guardado, devuelve true (mostrar video)
+  });
+
+  const handleIntroFinish = () => {
+    setShowIntro(false);
+    sessionStorage.setItem("intro_nebula_seen", "true");
+  };
+
   const todasLasPelis = getLSItems("db_peliculas") || [];
 
-  // Función de filtrado SEGURA
   const filtrar = (cat) => todasLasPelis.filter(p => {
-    // Requerimiento: Solo mostrar si está PUBLICADO
     if (!p.publicado) return false;
-
     const nombrePeli = p.nombre || p.titulo || "";
-    const coincideBusqueda = nombrePeli.toLowerCase().includes(searchTerm.toLowerCase());
-    return p.categoria === cat && coincideBusqueda;
+    return p.categoria === cat && nombrePeli.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
   const terror = filtrar("Terror");
   const comedia = filtrar("Comedia");
   const animados = filtrar("Animados");
 
-  // Buscamos la destacada (la que tiene la estrella en el Admin)
   const peliEstrella = todasLasPelis.find(p => p.destacada === true);
   const destacadaData = peliEstrella ? {
     titulo: peliEstrella.nombre,
@@ -35,7 +49,11 @@ const Home = ({ searchTerm = "" }) => {
 
   return (
     <>
+      {/* Usamos el componente importado correctamente */}
+      {showIntro && <IntroComponent onFinish={handleIntroFinish} />}
+
       <FeaturedMovie movie={destacadaData} />
+      
       <div className="container text-light mt-4">
         {terror.length > 0 || comedia.length > 0 || animados.length > 0 ? (
           <>

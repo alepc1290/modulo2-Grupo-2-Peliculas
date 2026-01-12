@@ -17,13 +17,13 @@ export default function Footer() {
 
           <Col md={4} className="text-center">
             <div className="socials">
-              <a href="/error404" target="_blank" rel="noreferrer">
+              <a href="/https://www.instagram.com/rollingcodeschool/" target="_blank" rel="noreferrer">
                 f
               </a>
-              <a href="/error404" target="_blank" rel="noreferrer">
+              <a href="/https://www.instagram.com/rollingcodeschool" target="_blank" rel="noreferrer">
                 ◎
               </a>
-              <a href="/error404" target="_blank" rel="noreferrer">
+              <a href="/https://www.instagram.com/rollingcodeschool/" target="_blank" rel="noreferrer">
                 X
               </a>
             </div>
