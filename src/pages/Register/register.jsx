@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./register.css";
 
 function Register() {
@@ -38,14 +38,11 @@ function Register() {
         return;
       }
     }
-
-    navigate("/admin");
-  };
+  }
 
   return (
     <div className="nebula-auth-wrapper">
       <div className="nebula-auth-card">
-
         <h1 className="nebula-logo">BIENVENIDO</h1>
 
         <div className="nebula-tabs">
@@ -64,10 +61,7 @@ function Register() {
           <div className={`tab-indicator ${mode}`} />
         </div>
 
-        <Form
-          className={`nebula-form ${mode}`}
-          onSubmit={handleSubmit}
-        >
+        <Form className={`nebula-form ${mode}`} onSubmit={handleSubmit}>
           {mode === "signup" && (
             <Form.Group>
               <Form.Control
@@ -127,17 +121,9 @@ function Register() {
           )}
 
           <div className="d-flex gap-3">
-            {mode === "signup" && (
-              <Button type="submit" className="search-btn">
-                Registrarme
-              </Button>
-            )}
-
-            {mode === "login" && (
-              <Button type="submit" className="search-btn">
-                Iniciar sesion
-              </Button>
-            )}
+            <Button type="submit" className="search-btn">
+              {mode === "signup" ? "Registrarme" : "Iniciar sesion"}
+            </Button>
           </div>
         </Form>
       </div>

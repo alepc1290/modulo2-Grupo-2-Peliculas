@@ -10,45 +10,48 @@ import "./navBar.css";
 
 function NavBar() {
   const [search, setSearch] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
 
   return (
     <Navbar expand="lg" className="navbar-nebula" fixed="top">
       <Container fluid className="navbar-container">
-
         <Navbar.Brand className="navbar-logo">
-          <img
-            src="/Nebula-LOGO.png"
-            alt="Nebula"
-            height="50"
-          />
+          <img src="/Nebula-LOGO.png" alt="Nebula" height="50" />
         </Navbar.Brand>
 
-        <Form className="navbar-search">
-          <InputGroup>
-            <InputGroup.Text className="search-icon">
-              <FaSearch />
-            </InputGroup.Text>
+        
+        <span
+          className="search-toggle"
+          style={{ cursor: "pointer" }}
+          onClick={() => setShowSearch(!showSearch)}
+        >
+          <FaSearch />
+        </span>
 
-            <Form.Control
-              type="text"
-              placeholder="Buscar película..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="search-input"
-            />
+        
+        {showSearch && (
+          <Form className="navbar-search">
+            <InputGroup>
+              <Form.Control
+                type="text"
+                placeholder="Buscar película..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+                autoFocus
+              />
 
-            {search.length > 0 && (
-              <Button className="search-btn btn-animated-border">
-                Buscar
-              </Button>
-            )}
-          </InputGroup>
-        </Form>
+              {search.length > 0 && (
+                <Button className="search-btn btn-animated-border">
+                  Buscar
+                </Button>
+              )}
+            </InputGroup>
+          </Form>
+        )}
 
         <Nav className="navbar-right">
-          <Nav.Link 
-          href="/home"
-          className="nav-link-custom">
+          <Nav.Link href="/home" className="nav-link-custom">
             Inicio
           </Nav.Link>
 
@@ -60,9 +63,7 @@ function NavBar() {
           >
             <FaUser size={20} />
           </Nav.Link>
-
         </Nav>
-
       </Container>
     </Navbar>
   );
