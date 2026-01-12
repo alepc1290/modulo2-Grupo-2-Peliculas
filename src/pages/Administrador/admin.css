@@ -89,3 +89,21 @@ main {
 .actions svg:hover {
   color: white;
 }
+/* admin.css */
+@media (max-width: 768px) {
+  .admin-container {
+    padding-top: 100px; /* Bajamos el margen superior en celular */
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .admin-header {
+    flex-direction: column; /* Título arriba, botón abajo */
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .admin-header h2 {
+    font-size: 18px; /* Texto más chico */
+  }
+}

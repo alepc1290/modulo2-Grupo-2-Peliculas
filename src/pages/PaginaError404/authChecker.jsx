@@ -1,13 +1,15 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { getLSItems } from '../../utils/function';
+import { Navigate } from "react-router-dom";
+import { getLSItems } from "../../utils/function";
 
-function AuthChecker({ children }) {
-    const isAdmin = getLSItems("isAdmin");
-    if (!isAdmin) {
-        return <Navigate to="/login" replace />;
-    }
-    return children;
-}
+const AuthChecker = ({ children }) => {
+  const userLogueado = getLSItems("user_session"); 
+
+  if (!userLogueado || userLogueado.rol !== "admin") {
+    return <Navigate to="/home" />;
+  }
+
+  return children;
+};
 
 export default AuthChecker;

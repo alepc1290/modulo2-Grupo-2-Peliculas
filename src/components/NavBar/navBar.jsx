@@ -7,11 +7,14 @@ import Button from "react-bootstrap/Button";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { useState } from "react";
 import "./navBar.css";
+import { getLSItems } from "../../utils/function";
 
 function NavBar() {
   const [search, setSearch] = useState("");
+  const user = getLSItems("user_session");
 
   return (
+
     <Navbar expand="lg" className="navbar-nebula" fixed="top">
       <Container fluid className="navbar-container">
 
@@ -46,9 +49,15 @@ function NavBar() {
         </Form>
 
         <Nav className="navbar-right">
-          <Nav.Link 
-          href="/home"
-          className="nav-link-custom">
+          <Nav.Link href="/home">Inicio</Nav.Link>
+          {user?.rol === "admin" && (
+            <Nav.Link href="/admin" className="text-warning">Panel Admin</Nav.Link>
+          )}
+
+          <span className="separator">|</span>
+          <Nav.Link
+            href="/home"
+            className="nav-link-custom">
             Inicio
           </Nav.Link>
 

@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { getLSItems, setLSItems } from "../../utils/function";
-import NuevaPeliculaModal from "../../components/Modal/modal"; 
+import NuevaPeliculaModal from "../../components/Modal/modal";
 import { FaTrash, FaEdit, FaStar } from "react-icons/fa";
-// 1. IMPORTANTE: Conectar el CSS
-import "./admin.css"; 
+import "./admin.css";
+
+const PELIS_INICIALES = [
+  { codigo: "1", nombre: "IT", imagen: "https://es.web.img3.acsta.net/pictures/17/04/07/12/58/197841.jpg", categoria: "Terror", publicado: true, descripcion: "Terror total." },
+  { codigo: "2", nombre: "SING", imagen: "https://akamai.sscdn.co/uploadfile/letras/playlists/5/c/9/d/5c9d93e2ee95424fb6d0149bd879dbb9.jpg", categoria: "Animados", publicado: true, descripcion: "Canto animal." }
+];
 
 function Admin() {
   const [dbPeliculas, setDbPeliculas] = useState([]);
@@ -12,10 +16,11 @@ function Admin() {
 
   useEffect(() => {
     const datos = getLSItems("db_peliculas");
-    if (datos) {
-      setDbPeliculas(datos);
+    if (!datos || datos.length === 0) {
+      setLSItems("db_peliculas", PELIS_INICIALES);
+      setDbPeliculas(PELIS_INICIALES);
     } else {
-      setDbPeliculas([]); 
+      setDbPeliculas(datos);
     }
   }, []);
 
@@ -32,77 +37,55 @@ function Admin() {
   };
 
   const handleDelete = (codigo) => {
-    if (window.confirm("¿Seguro que querés borrar esta película?")) {
-      const listaActualizada = dbPeliculas.filter(p => p.codigo !== codigo);
-      setDbPeliculas(listaActualizada);
-      setLSItems("db_peliculas", listaActualizada);
+    if (window.confirm("¿Borrar película?")) {
+      const nuevaLista = dbPeliculas.filter(p => p.codigo !== codigo);
+      setDbPeliculas(nuevaLista);
+      setLSItems("db_peliculas", nuevaLista);
     }
   };
 
   const handleStar = (codigo) => {
-    const listaActualizada = dbPeliculas.map(p => ({
-      ...p,
-      destacada: p.codigo === codigo 
-    }));
-    setDbPeliculas(listaActualizada);
-    setLSItems("db_peliculas", listaActualizada);
+    const nuevaLista = dbPeliculas.map(p => ({ ...p, destacada: p.codigo === codigo }));
+    setDbPeliculas(nuevaLista);
+    setLSItems("db_peliculas", nuevaLista);
   };
 
   return (
-    // 2. Aplicamos 'admin-container' para el espaciado superior
-    <div className="admin-container"> 
-      
-      {/* 3. El 'admin-panel' da el fondo con sombra y bordes redondeados */}
+    <div className="admin-container">
       <div className="admin-panel">
-        
-        {/* 4. Estructura del Header según tu CSS */}
         <div className="admin-header">
           <h2>Panel de Administración</h2>
-          <button 
-            className="btn-add-movie text-white p-2" 
-            onClick={() => { setPeliEditando(null); setShowModal(true); }}
-          >
+          <button className="btn-add-movie text-white p-2" onClick={() => { setPeliEditando(null); setShowModal(true); }}>
             + AGREGAR PELÍCULA
           </button>
         </div>
-
-        {/* 5. Cambiamos a 'admin-table' */}
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Categoría</th>
-              <th>Publicado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dbPeliculas.map(p => (
-              <tr key={p.codigo}>
-                <td>{p.nombre} {p.destacada && "⭐"}</td>
-                <td>{p.categoria}</td>
-                <td>{p.publicado ? "✅ SI" : "❌ NO"}</td>
-                {/* 6. Envolvemos en 'actions' para que los iconos sean violetas */}
-                <td className="actions">
-                  <FaEdit onClick={() => { setPeliEditando(p); setShowModal(true); }} />
-                  <FaTrash className="text-danger" onClick={() => handleDelete(p.codigo)} />
-                  <FaStar 
-                    className={p.destacada ? "text-warning" : ""} 
-                    onClick={() => handleStar(p.codigo)} 
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="table-responsive">
+          <table className="admin-table">
+          </table>
+        </div>
+        <div className="table-responsive"> 
+          <table className="admin-table">
+            <thead>
+              <tr><th>Título</th><th>Categoría</th><th>Publicado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              {dbPeliculas.map(p => (
+                <tr key={p.codigo}>
+                  <td>{p.nombre} {p.destacada && "⭐"}</td>
+                  <td>{p.categoria}</td>
+                  <td>{p.publicado ? "✅" : "❌"}</td>
+                  <td className="actions">
+                    <FaEdit onClick={() => { setPeliEditando(p); setShowModal(true); }} />
+                    <FaTrash className="text-danger" onClick={() => handleDelete(p.codigo)} />
+                    <FaStar className={p.destacada ? "text-warning" : ""} onClick={() => handleStar(p.codigo)} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-
-      <NuevaPeliculaModal 
-        show={showModal} 
-        onClose={() => setShowModal(false)} 
-        onSave={handleSave} 
-        pelicula={peliEditando} 
-      />
+      <NuevaPeliculaModal show={showModal} onClose={() => setShowModal(false)} onSave={handleSave} pelicula={peliEditando} />
     </div>
   );
 }

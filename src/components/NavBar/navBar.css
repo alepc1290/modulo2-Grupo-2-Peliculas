@@ -172,3 +172,14 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
+/* navBar.css */
+@media (max-width: 991px) {
+  .navbar-search {
+    width: 100%;
+    margin: 15px 0; /* Espacio para el buscador cuando el menú se despliega */
+  }
+  
+  .navbar-logo img {
+    height: 40px; /* Logo un poco más chico en mobile */
+  }
+}

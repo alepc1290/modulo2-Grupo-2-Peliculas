@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { getLSItems, setLSItems } from "../../utils/function"; // Ajustá la ruta si es necesario
+import { getLSItems, setLSItems } from "../../utils/function";
 import "./register.css";
 
 function Register() {
@@ -27,12 +27,11 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(""); // Limpiamos errores previos
+    setError("");
 
-    const listaUsuarios = getLSItems("users") || [];
+    const listaUsuarios = getLSItems("usuarios") || [];
 
     if (mode === "signup") {
-      // VALIDACIONES
       if (form.password !== form.confirmPassword) {
         return setError("Las contraseñas no coinciden");
       }
@@ -40,32 +39,37 @@ function Register() {
         return setError("Debes aceptar los términos y condiciones");
       }
 
-      // CREAR USUARIO (Acceso VIP como Admin)
       const nuevoUsuario = {
         username: form.nombre,
         email: form.email,
         password: form.password,
-        role: "admin", // Lo creamos como admin de una
+        rol: form.email === "admin@nebula.com" ? "admin" : "user",
         id: Date.now()
       };
 
-      setLSItems("users", [...listaUsuarios, nuevoUsuario]);
-      setLSItems("isAdmin", true); // Activamos permiso para el AuthChecker
-      setLSItems("userLogueado", nuevoUsuario);
+      setLSItems("usuarios", [...listaUsuarios, nuevoUsuario]);
       
-      navigate("/admin");
+      setLSItems("user_session", nuevoUsuario);
+
+      if (nuevoUsuario.rol === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/pagina-no-permitida"); 
+      }
 
     } else {
-      // LÓGICA DE LOGIN (Si el usuario cambia de pestaña)
       const usuarioEncontrado = listaUsuarios.find(
         (u) => u.email === form.email && u.password === form.password
       );
 
       if (usuarioEncontrado) {
-        const esAdmin = usuarioEncontrado.role === "admin";
-        setLSItems("isAdmin", esAdmin);
-        setLSItems("userLogueado", usuarioEncontrado);
-        navigate(esAdmin ? "/admin" : "/home");
+        setLSItems("user_session", usuarioEncontrado);
+        
+        if (usuarioEncontrado.rol === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/home");
+        }
       } else {
         setError("Credenciales incorrectas");
       }
